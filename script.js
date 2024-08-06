@@ -72,8 +72,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 resultDiv.appendChild(audioElem);
             })
-            .catch(error => {
-                resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+            .catch(() => {
+                // Clear previous results
+                resultDiv.innerHTML = '';
+
+                // Display word title and meaning: N/A
+                const titleElem = document.createElement('p');
+                titleElem.innerText = `Word Title: ${input.value.trim()}`;
+                resultDiv.appendChild(titleElem);
+
+                const definitionElem = document.createElement('p');
+                definitionElem.innerText = 'Meaning: N/A';
+                resultDiv.appendChild(definitionElem);
+
+                // Hide the paragraph with ID 'type'
+                if (typeParagraph) {
+                    typeParagraph.style.display = 'none'; // Hide the paragraph
+                }
             });
     }
 });
